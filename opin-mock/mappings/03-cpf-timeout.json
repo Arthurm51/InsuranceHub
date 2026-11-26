@@ -1,0 +1,17 @@
+{
+  "name": "OPIN - CPF 71460238001 (Ana): resposta lenta (5 s, acima do timeout de 3 s)",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/opin/v1/insurance-policies",
+    "queryParameters": {
+      "cpf": { "equalTo": "71460238001" }
+    }
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 5000,
+    "headers": { "Content-Type": "application/json" },
+    "jsonBody": { "cpf": "71460238001", "data": [] }
+  }
+}

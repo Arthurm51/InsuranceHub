@@ -1,0 +1,16 @@
+{
+  "name": "OPIN - CPF 11144477735: cliente sem apólices em congêneres",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/opin/v1/insurance-policies",
+    "queryParameters": {
+      "cpf": { "equalTo": "11144477735" }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": { "Content-Type": "application/json" },
+    "jsonBody": { "cpf": "11144477735", "data": [] }
+  }
+}

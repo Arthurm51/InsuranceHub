@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InsureHub</title>
+  <link rel="icon" href="/img/insurehub-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<a class="skip" href="#view">Pular para o conteúdo</a>
+
+<header class="topbar" data-testid="topbar">
+  <a class="brand" href="#/inicio" aria-label="InsureHub, início">
+    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><use href="#mark-insurehub"/></svg>
+    <span>InsureHub</span>
+  </a>
+  <nav class="mainnav" id="mainnav" hidden aria-label="Principal">
+    <a href="#/inicio" data-nav="inicio" data-testid="nav-home">Início</a>
+    <a href="#/contratar" data-nav="contratar" data-testid="nav-contract">Contratar</a>
+    <a href="#/sinistros" data-nav="sinistros" data-testid="nav-claims">Sinistros</a>
+    <a href="#/compartilhamento" data-nav="compartilhamento" data-testid="nav-sharing">Outras seguradoras</a>
+  </nav>
+  <div class="session" id="session" hidden>
+    <span data-testid="session-user" id="session-user"></span>
+    <button class="btn-quiet" data-testid="logout-button" id="logout-button">Sair</button>
+  </div>
+</header>
+
+<main id="view" tabindex="-1"></main>
+
+<div id="toast" class="toast" data-testid="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- Marcas e ícones reutilizados -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark-insurehub" viewBox="0 0 32 32">
+      <path d="M16 2 29.3 11.7 24.2 27.3H7.8L2.7 11.7Z" fill="currentColor"/>
+      <path d="M16 9.5 22.2 14 19.8 21.4H12.2L9.8 14Z" fill="#fff"/>
+    </symbol>
+    <symbol id="ico-vida" viewBox="0 0 24 24">
+      <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M7.5 11.5h2.6l1.2-2 1.8 4 1.2-2h2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-auto" viewBox="0 0 24 24">
+      <path d="M4 15.5v-3l2-4.5h12l2 4.5v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M4.5 12h15M7 16.5V19M17 16.5V19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      <circle cx="7.5" cy="14" r=".9" fill="currentColor"/><circle cx="16.5" cy="14" r=".9" fill="currentColor"/>
+    </symbol>
+    <symbol id="ico-residencial" viewBox="0 0 24 24">
+      <path d="M4 11 12 4l8 7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 9.5V20h12V9.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-previdencia" viewBox="0 0 24 24">
+      <path d="M12 20V11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="M12 12c0-3.3-2.5-5.5-6-5.5 0 3.3 2.6 5.5 6 5.5ZM12 10.5c0-3 2.2-5 5.5-5 0 3-2.3 5-5.5 5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M7 20h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-viagem" viewBox="0 0 24 24">
+      <path d="M10.5 13.5 4 11l1.2-1.2 7.3.6 3.9-4a1.8 1.8 0 0 1 2.5 2.5l-4 3.9.6 7.3-1.2 1.2-2.5-6.5-3 2.8v2.2L7.6 21l-1-2.6L4 17.4l1.2-1.2h2.2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-chevron" viewBox="0 0 24 24">
+      <path d="m8 10 4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-back" viewBox="0 0 24 24">
+      <path d="m14 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

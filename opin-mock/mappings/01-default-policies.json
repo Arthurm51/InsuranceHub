@@ -1,0 +1,99 @@
+{
+  "name": "OPIN - padrão: 4 apólices de congêneres (Auto, Vida, Previdência, Viagem) para qualquer CPF",
+  "priority": 10,
+  "request": {
+    "method": "GET",
+    "urlPath": "/opin/v1/insurance-policies",
+    "queryParameters": {
+      "cpf": { "matches": "^\\d{11}$" }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": { "Content-Type": "application/json" },
+    "transformers": ["response-template"],
+    "jsonBody": {
+      "cpf": "{{request.query.cpf}}",
+      "data": [
+        {
+          "policyId": "ALFA-AUTO-{{request.query.cpf}}",
+          "insurer": "Seguradora Alfa",
+          "line": "AUTO",
+          "policyNumber": "ALF-77812-{{substring request.query.cpf 7 11}}",
+          "planName": "Alfa Auto Clássico",
+          "insuredName": "{{#if (eq request.query.cpf.[0] '52998224725')}}Maria Oliveira{{else if (eq request.query.cpf.[0] '98765432100')}}Paula Andrade{{else}}Titular da apólice{{/if}}",
+          "insuredAmount": 85000.00,
+          "annualPremium": 3910.00,
+          "startDate": "{{now offset='-335 days' format='yyyy-MM-dd'}}",
+          "endDate": "{{now offset='30 days' format='yyyy-MM-dd'}}",
+          "details": {
+            "plate": "QRS4E21",
+            "deductible": 4250.00,
+            "drivers": [
+              { "name": "{{#if (eq request.query.cpf.[0] '52998224725')}}Maria Oliveira{{else if (eq request.query.cpf.[0] '98765432100')}}Paula Andrade{{else}}Titular da apólice{{/if}}" },
+              { "name": "Rafael Andrade" }
+            ]
+          }
+        },
+        {
+          "policyId": "DELTA-VIDA-{{request.query.cpf}}",
+          "insurer": "Delta Vida e Previdência",
+          "line": "VIDA",
+          "policyNumber": "DVP-30021-{{substring request.query.cpf 7 11}}",
+          "planName": "Delta Vida Família",
+          "insuredName": "{{#if (eq request.query.cpf.[0] '52998224725')}}Maria Oliveira{{else if (eq request.query.cpf.[0] '98765432100')}}Paula Andrade{{else}}Titular da apólice{{/if}}",
+          "insuredAmount": 300000.00,
+          "annualPremium": 1440.00,
+          "startDate": "{{now offset='-165 days' format='yyyy-MM-dd'}}",
+          "endDate": "{{now offset='200 days' format='yyyy-MM-dd'}}",
+          "details": {
+            "insuredCapital": 300000.00,
+            "beneficiaries": [
+              { "name": "Rafael Andrade", "relationship": "Cônjuge", "percentage": 60 },
+              { "name": "Lia Andrade", "relationship": "Filha", "percentage": 40 }
+            ]
+          }
+        },
+        {
+          "policyId": "BETA-PREV-{{request.query.cpf}}",
+          "insurer": "Beta Seguros",
+          "line": "PREVIDENCIA",
+          "policyNumber": "BTS-PRV-11873-{{substring request.query.cpf 7 11}}",
+          "planName": "Beta Prev Moderado",
+          "insuredName": "{{#if (eq request.query.cpf.[0] '52998224725')}}Maria Oliveira{{else if (eq request.query.cpf.[0] '98765432100')}}Paula Andrade{{else}}Titular da apólice{{/if}}",
+          "annualPremium": 9600.00,
+          "startDate": "{{now offset='-1460 days' format='yyyy-MM-dd'}}",
+          "endDate": "{{now offset='9490 days' format='yyyy-MM-dd'}}",
+          "details": {
+            "planType": "VGBL",
+            "monthlyContribution": 800.00,
+            "accumulatedBalance": 46350.75,
+            "beneficiaries": [
+              { "name": "Lia Andrade", "relationship": "Filha", "percentage": 100 }
+            ]
+          }
+        },
+        {
+          "policyId": "GAMA-VIAG-{{request.query.cpf}}",
+          "insurer": "Gama Previdência e Seguros",
+          "line": "VIAGEM",
+          "policyNumber": "GMV-0091-{{substring request.query.cpf 7 11}}",
+          "planName": "Gama Travel Europa",
+          "insuredName": "{{#if (eq request.query.cpf.[0] '52998224725')}}Maria Oliveira{{else if (eq request.query.cpf.[0] '98765432100')}}Paula Andrade{{else}}Titular da apólice{{/if}}",
+          "insuredAmount": 60000.00,
+          "annualPremium": 480.00,
+          "startDate": "{{now offset='-10 days' format='yyyy-MM-dd'}}",
+          "endDate": "{{now offset='19 days' format='yyyy-MM-dd'}}",
+          "details": {
+            "destination": "Lisboa, Portugal",
+            "tripDays": 30,
+            "travelers": [
+              { "name": "{{#if (eq request.query.cpf.[0] '52998224725')}}Maria Oliveira{{else if (eq request.query.cpf.[0] '98765432100')}}Paula Andrade{{else}}Titular da apólice{{/if}}" },
+              { "name": "Rafael Andrade" }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

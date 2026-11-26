@@ -1,0 +1,37 @@
+# Build
+target/
+api/target/
+node_modules/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Ambiente / segredos
+.env
+.env.*
+!.env.example
+.auth
+
+# SO
+.DS_Store
+Thumbs.db
+
+# Relatórios de teste gerados
+allure-results/
+allure-report/
+test-results/
+playwright-report/
+tests/performance/results/
+blob-report/
+
+# Plugins
+playwright/.cache/
+.allure/
+
+# Logs
+*.log

@@ -1,0 +1,56 @@
+name: insurehub
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: insurehub
+      POSTGRES_USER: insurehub
+      POSTGRES_PASSWORD: insurehub
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U insurehub -d insurehub"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  opin-mock:
+    image: wiremock/wiremock:3.9.1
+    command: ["--port", "8089", "--verbose"]
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./opin-mock/mappings:/home/wiremock/mappings:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:8089/__admin/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: ./api
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/insurehub
+      DB_USER: insurehub
+      DB_PASSWORD: insurehub
+      OPIN_BASE_URL: http://opin-mock:8089
+      # JWT_SECRET: defina aqui ou via .env para ambientes compartilhados
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      opin-mock:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      start_period: 40s
+      retries: 10
+
+volumes:
+  pgdata:
