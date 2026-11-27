@@ -1,0 +1,43 @@
+name: 📋 Tarefa
+description: Etapa do roteiro ou atividade planejada
+title: "[TAREFA] "
+labels: ["tarefa"]
+body:
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: O que esta tarefa entrega e por quê.
+      placeholder: Documentar a análise de risco das regras RN-01 a RN-12.
+    validations:
+      required: true
+
+  - type: textarea
+    id: criterio-de-pronto
+    attributes:
+      label: Critério de pronto
+      description: Como saber que a tarefa está concluída.
+      placeholder: docs/qa/analise-de-risco.md revisado e integrado via PR.
+    validations:
+      required: true
+
+  - type: textarea
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Passos da tarefa. Para etapas do roteiro, copie os itens do plano.md.
+      value: |
+        - [ ] 
+        - [ ] 
+        - [ ]
+    validations:
+      required: true
+
+  - type: input
+    id: referencias
+    attributes:
+      label: Referências
+      description: RN, US ou documentos relacionados.
+      placeholder: RN-03, US-04, plano.md Etapa 3
+    validations:
+      required: false
