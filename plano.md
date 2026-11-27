@@ -41,7 +41,6 @@ Roteiro do projeto de QA, organizado como um projeto real em sprints. Cada etapa
 - [ ] Quadro no GitHub Projects com uma issue por etapa deste roteiro
 - [ ] Templates de issue (bug, tarefa) e de PR
 - [ ] Estrutura de pastas: `docs/qa/`, `tests/api/`, `tests/e2e/`, `tests/performance/`, `.github/workflows/`
-- [ ] README informando que o sistema-alvo foi gerado e que o QA é autoral
 - **Pronto quando:** repositório publicado e backlog montado no quadro.
 
 ## Sprint 1 — Análise e planejamento
@@ -158,6 +157,7 @@ Roteiro do projeto de QA, organizado como um projeto real em sprints. Cada etapa
 - **Entregável:** `docs/qa/relatorio-final.md`
 
 ### Etapa 21. Publicação
+- [ ] README informando que o sistema-alvo foi gerado e que o QA é autoral
 - [ ] README final: arquitetura, como rodar, ADRs, GIF do E2E, links de relatório e docs
 - [ ] Repositório público
 - [ ] Card no site de portfólio (PT/EN) e atualização do `perfil.md`
